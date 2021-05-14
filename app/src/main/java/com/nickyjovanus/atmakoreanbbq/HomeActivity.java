@@ -2,9 +2,12 @@ package com.nickyjovanus.atmakoreanbbq;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
+import com.google.android.material.button.MaterialButton;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -12,6 +15,7 @@ public class HomeActivity extends AppCompatActivity {
 
     CarouselView carouselView;
     int[] carouselImages = {R.drawable.carousel1, R.drawable.carousel2, R.drawable.carousel3};
+    MaterialButton scanqr, reservasi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,4 +33,8 @@ public class HomeActivity extends AppCompatActivity {
             imageView.setImageResource(carouselImages[position]);
         }
     };
+
+    public void qrscan(View view){
+        startActivity(new Intent(HomeActivity.this,QRScanActivity.class));
+    }
 }
