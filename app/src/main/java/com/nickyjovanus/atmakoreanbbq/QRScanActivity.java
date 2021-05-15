@@ -2,7 +2,14 @@ package com.nickyjovanus.atmakoreanbbq;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -13,21 +20,26 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 
 public class QRScanActivity extends AppCompatActivity {
+    //QR Scanner
     private CodeScanner mCodeScanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_qrscan);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
+
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(QRScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(QRScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
+                        if(result.getText().equals("https://atmakoreanbbq.web.app/barcode")) {
+                            startActivity(new Intent(QRScanActivity.this,CustomerActivity.class));
+                        }
                     }
                 });
             }
@@ -51,4 +63,13 @@ public class QRScanActivity extends AppCompatActivity {
         mCodeScanner.releaseResources();
         super.onPause();
     }
+    
+    public void home(View view){
+        startActivity(new Intent(QRScanActivity.this,HomeActivity.class));
+    }
+
+    public void customer(View view){
+        startActivity(new Intent(QRScanActivity.this,CustomerActivity.class));
+    }
+
 }

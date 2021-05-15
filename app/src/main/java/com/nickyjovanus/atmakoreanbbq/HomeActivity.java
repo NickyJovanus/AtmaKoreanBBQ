@@ -1,8 +1,12 @@
 package com.nickyjovanus.atmakoreanbbq;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +20,9 @@ public class HomeActivity extends AppCompatActivity {
     CarouselView carouselView;
     int[] carouselImages = {R.drawable.carousel1, R.drawable.carousel2, R.drawable.carousel3};
     MaterialButton scanqr, reservasi;
+
+    //Camera
+    private static final int PERMISSION_CODE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,27 @@ public class HomeActivity extends AppCompatActivity {
     };
 
     public void qrscan(View view){
-        startActivity(new Intent(HomeActivity.this,QRScanActivity.class));
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+            //request enabling permission
+            String[] permission = {Manifest.permission.CAMERA};
+
+            //show popup to request permission
+            requestPermissions(permission, PERMISSION_CODE);
+        } else {
+            startActivity(new Intent(HomeActivity.this, QRScanActivity.class));
+        }
+    }
+
+
+    public void menu(View view) {
+        startActivity(new Intent(HomeActivity.this, MenuActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 }

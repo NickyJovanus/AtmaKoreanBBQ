@@ -22,9 +22,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 }
 
@@ -59,5 +64,8 @@ dependencies {
 
     //qr code scanner
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+    //Swipe Refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 }

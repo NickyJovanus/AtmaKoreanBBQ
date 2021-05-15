@@ -3,4 +3,5 @@
     <string name="atma_korean_bbq">Atma Korean BBQ</string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="welcome_to_atma_korean_bbq">Welcome to Atma Korean BBQ!</string>
+    <string name="rp">Rp. </string>
 </resources>

@@ -73,6 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:icon="@drawable/ic_baseline_qr_code_scanner_24"
         app:iconTint="@color/white"
+        app:iconSize="50sp"
         app:iconGravity="textStart"
         android:text="@string/scan_qr_code"
         android:textSize="20sp"
@@ -87,12 +88,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_scanqr"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:icon="@drawable/ic_baseline_date_range_24"
+        app:icon="@drawable/ic_baseline_restaurant_menu_24"
         app:iconTint="@color/white"
+        app:iconSize="50sp"
         app:iconGravity="textStart"
-        android:text="Reservasi"
+        android:text="Browse Menu"
         android:textSize="20sp"
         android:textColor="@color/white"
+        android:onClick="menu"
         android:layout_marginTop="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
