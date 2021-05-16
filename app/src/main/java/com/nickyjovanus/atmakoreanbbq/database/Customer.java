@@ -1,7 +1,11 @@
 package com.nickyjovanus.atmakoreanbbq.database;
 
 public class Customer {
-    private String namaCustomer, telponCustomer, emailCustomer;
+
+    private int idCustomer;
+    private String namaCustomer,
+                   telponCustomer,
+                   emailCustomer;
 
     public String getNamaCustomer() {
         return namaCustomer;
@@ -27,10 +31,19 @@ public class Customer {
         this.emailCustomer = emailCustomer;
     }
 
-    public Customer(String namaCustomer, String telponCustomer, String emailCustomer) {
-        this.namaCustomer = namaCustomer;
+    public int getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
+    }
+
+    public Customer(int idCustomer, String namaCustomer, String telponCustomer, String emailCustomer) {
+        this.idCustomer     = idCustomer;
+        this.namaCustomer   = namaCustomer;
         this.telponCustomer = telponCustomer;
-        this.emailCustomer = emailCustomer;
+        this.emailCustomer  = emailCustomer;
     }
 
     public Customer(){}

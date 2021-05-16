@@ -49,6 +49,13 @@ dependencies {
     //Easy Swipe Layout library untuk swipe di recycle view
     implementation 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
 
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
     //VOLLEY ini merupakan library yang memudahkan aplikasi android
     // untuk mengakses jaringan dengan mudah dan cepat.
     implementation 'com.android.volley:volley:1.1.0'

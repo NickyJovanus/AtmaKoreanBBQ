@@ -10,6 +10,7 @@ public class SharedPreferences {
     private android.content.SharedPreferences.Editor editor;
     private static final String PREFERENCE_NAME = "JSMPref";
 
+    private static final String idCustomer     = "id";
     private static final String namaCustomer   = "nama";
     private static final String telponCustomer = "telpon";
     private static final String emailCustomer  = "email";
@@ -20,6 +21,7 @@ public class SharedPreferences {
     }
 
     public void createCustomer(Customer customer){
+        editor.putInt(idCustomer, customer.getIdCustomer());
         editor.putString(namaCustomer,customer.getNamaCustomer());
         editor.putString(telponCustomer, customer.getTelponCustomer());
         editor.putString(emailCustomer,customer.getEmailCustomer());
@@ -28,6 +30,7 @@ public class SharedPreferences {
 
     public Customer getCustomer() {
         Customer customer = new Customer();
+        customer.setIdCustomer(preferences.getInt(idCustomer,0));
         customer.setNamaCustomer(preferences.getString(namaCustomer,""));
         customer.setTelponCustomer(preferences.getString(telponCustomer,""));
         customer.setEmailCustomer(preferences.getString(emailCustomer,""));
@@ -35,5 +38,6 @@ public class SharedPreferences {
     }
 
     public String getNamaCustomer() {return preferences.getString(namaCustomer,"");}
+    public int getIdCustomer() {return preferences.getInt(idCustomer,0);}
 }
 
