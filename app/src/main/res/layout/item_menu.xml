@@ -27,7 +27,7 @@
             android:layout_height="180dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:pImage="@{menu.setGambarMenu}"
+            app:pImage="@{menu.gambarMenu}"
             tools:src="@color/white"/>
 
         <TextView
