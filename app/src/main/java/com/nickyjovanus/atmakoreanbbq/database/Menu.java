@@ -24,19 +24,19 @@ public class Menu implements Serializable {
     public String deskripsiMenu;
     public int stokMenu;
     public String kategoriMenu;
-    public String imgURL;
+    public String gambarMenu;
 
-    public Menu(String namaMenu, double hargaMenu, int stokMenu, String unitMenu, String deskripsiMenu, String kategoriMenu, String imgURL) {
+    public Menu(String namaMenu, double hargaMenu, int stokMenu, String unitMenu, String deskripsiMenu, String kategoriMenu, String gambarMenu) {
         this.namaMenu = namaMenu;
         this.hargaMenu = hargaMenu;
         this.unitMenu = unitMenu;
         this.deskripsiMenu = deskripsiMenu;
         this.stokMenu = stokMenu;
         this.kategoriMenu = kategoriMenu;
-        this.imgURL = imgURL;
+        this.gambarMenu = gambarMenu;
     }
 
-    public Menu(int idMenu, String namaMenu, double hargaMenu, int stokMenu, String unitMenu, String deskripsiMenu, String kategoriMenu, String imgURL) {
+    public Menu(int idMenu, String namaMenu, double hargaMenu, int stokMenu, String unitMenu, String deskripsiMenu, String kategoriMenu, String gambarMenu) {
         this.idMenu = idMenu;
         this.namaMenu = namaMenu;
         this.hargaMenu = hargaMenu;
@@ -44,7 +44,7 @@ public class Menu implements Serializable {
         this.deskripsiMenu = deskripsiMenu;
         this.stokMenu = stokMenu;
         this.kategoriMenu = kategoriMenu;
-        this.imgURL = imgURL;
+        this.gambarMenu = gambarMenu;
     }
 
     public String getNamaMenu() {
@@ -95,12 +95,12 @@ public class Menu implements Serializable {
         this.kategoriMenu = kategoriMenu;
     }
 
-    public String getImgURL() {
-        return imgURL;
+    public String getGambarMenu() {
+        return gambarMenu;
     }
 
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+    public void setGambarMenu(String gambarMenu) {
+        this.gambarMenu = gambarMenu;
     }
 
     @BindingAdapter("pImage")
