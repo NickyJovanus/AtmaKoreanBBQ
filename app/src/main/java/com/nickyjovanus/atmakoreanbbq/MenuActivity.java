@@ -2,6 +2,7 @@ package com.nickyjovanus.atmakoreanbbq;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -153,21 +154,25 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void generateDataList(List<Menu> menuList) {
+        recyclerView = findViewById(R.id.rv_menu);
+        adapter = new RecyclerViewAdapterMenu(this,menuList);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_menu);
         binding.rvMenu.setLayoutManager((new LinearLayoutManager(this)));
-        adapter = new RecyclerViewAdapterMenu(MenuActivity.this,menuList);
+        binding.rvMenu.setItemAnimator(new DefaultItemAnimator());
         binding.setAdaptermenu(adapter);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                adapter.getFilter().filter(s);
+            public boolean onQueryTextSubmit(String query) {
+                Log.i("search submit", query);
+                adapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
+            public boolean onQueryTextChange(String newText) {
+                Log.i("search change", newText);
+                adapter.getFilter().filter(newText);
                 return false;
             }
         });
