@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,10 +27,6 @@ public class RecyclerViewAdapterMenu extends RecyclerView.Adapter<RecyclerViewAd
     private Context context;
     private List<Menu> result;
 
-    public RecyclerViewAdapterMenu(List<Menu> result) {
-        this.result = result;
-    }
-
     public RecyclerViewAdapterMenu(Context context, List<Menu> result) {
         this.context   = context;
         this.result    = result;
@@ -38,31 +35,27 @@ public class RecyclerViewAdapterMenu extends RecyclerView.Adapter<RecyclerViewAd
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-//        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-//        context = viewGroup.getContext();
-//        view = layoutInflater.inflate(R.layout.item_menu, viewGroup, false);
-
         ItemMenuBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_menu, parent, false);
         return new MenuViewHolder(binding);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MenuViewHolder holder, int position) {
         final Menu menu = result.get(position);
         holder.bind(menu);
-
         NumberFormat formatter = new DecimalFormat("#,###");
-        holder.txtNama.setText(menu.getNamaMenu());
-        holder.txtHarga.setText(String.valueOf(menu.getHargaMenu()));
-        holder.txtDeskripsi.setText(menu.getDeskripsiMenu());
-        holder.txtKategori.setText(menu.getKategoriMenu());
-        holder.txtUnit.setText(menu.getUnitMenu());
 
-        Glide.with(context)
-                .load(menu.getImgURL())
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(holder.ivFoto);
+        if (!menu.getImgURL().equals("")) {
+            Glide.with(context)
+                    .load(menu.getImgURL())
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .centerCrop()
+                    .into(holder.ivFoto);
+        } else {
+            holder.ivFoto.setImageResource(R.drawable.logo);
+        }
     }
 
     @Override
@@ -72,7 +65,6 @@ public class RecyclerViewAdapterMenu extends RecyclerView.Adapter<RecyclerViewAd
 
     public class MenuViewHolder extends RecyclerView.ViewHolder{
         private ItemMenuBinding itemMenuBinding;
-        private TextView txtNama, txtHarga, txtKategori, txtUnit, txtDeskripsi;
         private ImageView ivFoto;
 
         public MenuViewHolder(ItemMenuBinding itemMenuBinding) {
@@ -80,26 +72,14 @@ public class RecyclerViewAdapterMenu extends RecyclerView.Adapter<RecyclerViewAd
             this.itemMenuBinding = itemMenuBinding;
         }
 
-        public MenuViewHolder(View itemView){
-            super(itemView);
-            txtNama       = itemView.findViewById(R.id.namaMenu);
-            txtHarga      = itemView.findViewById(R.id.hargaMenu);
-            txtKategori   = itemView.findViewById(R.id.category);
-            txtUnit       = itemView.findViewById(R.id.unit);
-            txtDeskripsi  = itemView.findViewById(R.id.deskripsi);
-            ivFoto        = itemView.findViewById(R.id.iv_fotoBarang);
+        public void bind(Object obj) {
+            itemMenuBinding.setVariable(BR.menu, obj);
+            itemMenuBinding.executePendingBindings();
+            ivFoto = itemView.findViewById(R.id.iv_fotoBarang);
         }
 
-        public void bind(Object obj) {
-            itemMenuBinding.setVariable(com.nickyjovanus.atmakoreanbbq.BR.menu, obj);
-            itemMenuBinding.executePendingBindings();
-            txtNama       = itemView.findViewById(R.id.namaMenu);
-            txtHarga      = itemView.findViewById(R.id.hargaMenu);
-            txtKategori   = itemView.findViewById(R.id.category);
-            txtUnit       = itemView.findViewById(R.id.unit);
-            txtDeskripsi  = itemView.findViewById(R.id.deskripsi);
-            ivFoto        = itemView.findViewById(R.id.iv_fotoBarang);
-
+        public ItemMenuBinding getItemMenuBinding() {
+            return itemMenuBinding;
         }
     }
 }

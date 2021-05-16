@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.android.volley.Request.Method.GET;
@@ -46,12 +47,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         ListMenu = new ArrayList<Menu>();
         getMenu();
-
-//        binding = DataBindingUtil.setContentView(MenuActivity.this,R.layout.activity_menu);
-//        adapter = new RecyclerViewAdapterMenu(MenuActivity.this, ListMenu);
-//        binding.rvMenu.setAdapter(adapter);
-//        binding.rvMenu.setLayoutManager((new LinearLayoutManager(this)));
-
 
         binding= DataBindingUtil.setContentView(this,R.layout.activity_menu);
         binding.rvMenu.setLayoutManager((new LinearLayoutManager(this)));
@@ -93,6 +88,7 @@ public class MenuActivity extends AppCompatActivity {
                         String gambar        = jsonObject.optString("gambar_menu");
 
                         Menu menu = new Menu(idMenu, namaMenu, hargaMenu, stokMenu,unitMenu, deskripsiMenu, kategori,gambar);
+                        ListMenu.add(menu);
                     }
                     adapter.notifyDataSetChanged();
                 }catch (JSONException e){

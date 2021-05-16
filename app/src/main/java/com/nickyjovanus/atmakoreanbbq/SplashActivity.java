@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.nickyjovanus.atmakoreanbbq.database.Customer;
+
 public class SplashActivity extends AppCompatActivity {
 
     Handler handler;
@@ -24,5 +26,11 @@ public class SplashActivity extends AppCompatActivity {
                 finish();
             }
         },1500);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
     }
 }

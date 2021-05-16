@@ -26,6 +26,7 @@ public class QRScanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sp = new SharedPreferences(this);
         setContentView(R.layout.activity_qrscan);
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(this, scannerView);
@@ -36,9 +37,11 @@ public class QRScanActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-//                        Toast.makeText(QRScanActivity.this, result.getText(), Toast.LENGTH_SHORT).show();
                         if(result.getText().equals("https://atmakoreanbbq.web.app/barcode")) {
-                            startActivity(new Intent(QRScanActivity.this,CustomerActivity.class));
+                            if(sp.getNamaCustomer().equals(""))
+                                startActivity(new Intent(QRScanActivity.this,CustomerActivity.class));
+                            else
+                                startActivity(new Intent(QRScanActivity.this,ReservationListActivity.class));
                         }
                     }
                 });

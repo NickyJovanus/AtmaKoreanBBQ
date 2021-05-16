@@ -14,10 +14,11 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AtmaKoreanBBQ">
-        <activity android:name=".MenuActivity"></activity>
+        android:theme="@style/Theme.AtmaKoreanBBQ"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ReservationListActivity"></activity>
+        <activity android:name=".MenuActivity" />
         <activity android:name=".CustomerActivity" />
         <activity android:name=".QRScanActivity" />
         <activity android:name=".HomeActivity" />
