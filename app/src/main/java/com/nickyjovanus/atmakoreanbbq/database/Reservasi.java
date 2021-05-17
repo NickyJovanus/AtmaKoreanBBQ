@@ -1,25 +1,27 @@
 package com.nickyjovanus.atmakoreanbbq.database;
 
 public class Reservasi {
-    private int idReservasi;
-    private String tanggalReservasi;
-    private String sesiReservasi;
-    private int idPesanan;
-    private int idMeja;
-    private int totalMenu;
-    private int totalItem;
-    private int idKaryawan;
+    public int idReservasi;
+    public String tanggalReservasi;
+    public String sesiReservasi;
+    public int idPesanan;
+    public int idMeja;
+    public int noMeja;
+    public int totalMenu;
+    public int totalItem;
+    public int idKaryawan;
 
     public Reservasi() {}
 
     public Reservasi(int idReservasi, String tanggalReservasi, String sesiReservasi,
-                     int idPesanan, int idMeja, int totalMenu, int totalItem,
+                     int idPesanan, int idMeja, int noMeja, int totalMenu, int totalItem,
                      int idKaryawan) {
         this.idReservasi = idReservasi;
         this.tanggalReservasi = tanggalReservasi;
         this.sesiReservasi = sesiReservasi;
         this.idPesanan = idPesanan;
         this.idMeja = idMeja;
+        this.noMeja = noMeja;
         this.totalMenu = totalMenu;
         this.totalItem = totalItem;
         this.idKaryawan = idKaryawan;
@@ -63,6 +65,14 @@ public class Reservasi {
 
     public void setIdMeja(int idMeja) {
         this.idMeja = idMeja;
+    }
+
+    public int getNoMeja() {
+        return noMeja;
+    }
+
+    public void setNoMeja(int noMeja) {
+        this.noMeja = noMeja;
     }
 
     public int getTotalMenu() {

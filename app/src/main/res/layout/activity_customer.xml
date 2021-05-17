@@ -35,7 +35,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <TextView
-            android:id="@+id/title_profile"
+            android:id="@+id/title_pesanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -50,7 +50,7 @@
             android:id="@+id/linear_form"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/title_profile"
+            app:layout_constraintTop_toBottomOf="@id/title_pesanan"
             android:layout_marginTop="50dp"
             android:layout_height="300dp"
             android:orientation="vertical"
@@ -61,7 +61,7 @@
                 android:layout_weight="0.8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/ti_namaCustomer"
+                android:id="@+id/ti_tanggalReservasi"
                 android:textColorHint="@color/white"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Nama Lengkap"
@@ -72,7 +72,7 @@
                     android:fontFamily="sans-serif-condensed-light"
                     android:textColor="@color/white"
                     android:inputType="text"
-                    android:id="@+id/tf_namaCustomer">
+                    android:id="@+id/tf_tanggalReservasi">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 

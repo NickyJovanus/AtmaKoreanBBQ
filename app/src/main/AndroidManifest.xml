@@ -17,13 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AtmaKoreanBBQ"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReservationListActivity"></activity>
-        <activity android:name=".MenuActivity" >
+        <activity android:name=".AddReservasiActivity"></activity>
+        <activity android:name=".ReservasiEditActivity" />
+        <activity android:name=".ReservationListActivity" />
+        <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".CustomerActivity" />
         <activity android:name=".QRScanActivity" />

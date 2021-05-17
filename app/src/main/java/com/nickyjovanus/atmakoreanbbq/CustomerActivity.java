@@ -2,7 +2,6 @@ package com.nickyjovanus.atmakoreanbbq;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.nickyjovanus.atmakoreanbbq.API.CustomerAPI;
 import com.nickyjovanus.atmakoreanbbq.database.Customer;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,11 +42,11 @@ public class CustomerActivity extends AppCompatActivity {
         
         sp = new SharedPreferences(CustomerActivity.this);
 
-        namaCustomer    = findViewById(R.id.tf_namaCustomer);
+        namaCustomer    = findViewById(R.id.tf_tanggalReservasi);
         telponCustomer  = findViewById(R.id.tf_telponCustomer);
         emailCustomer   = findViewById(R.id.tf_emailCustomer);
 
-        namaLayout      = findViewById(R.id.ti_namaCustomer);
+        namaLayout      = findViewById(R.id.ti_tanggalReservasi);
         telponLayout    = findViewById(R.id.ti_telponCustomer);
         emailLayout     = findViewById(R.id.ti_emailCustomer);
 

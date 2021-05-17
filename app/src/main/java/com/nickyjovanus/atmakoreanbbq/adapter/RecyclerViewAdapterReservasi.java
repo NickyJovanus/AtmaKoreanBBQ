@@ -1,16 +1,21 @@
 package com.nickyjovanus.atmakoreanbbq.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filterable;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nickyjovanus.atmakoreanbbq.BR;
 import com.nickyjovanus.atmakoreanbbq.R;
+import com.nickyjovanus.atmakoreanbbq.ReservasiEditActivity;
 import com.nickyjovanus.atmakoreanbbq.database.Reservasi;
 import com.nickyjovanus.atmakoreanbbq.databinding.ItemReservasiBinding;
 
@@ -37,6 +42,19 @@ public class RecyclerViewAdapterReservasi extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(@NonNull final RecyclerViewAdapterReservasi.ResViewHolder holder, int position) {
         final Reservasi reservasi = result.get(position);
         holder.bind(reservasi);
+
+        holder.positionId.setText(String.valueOf(position+1));
+
+        holder.mParent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ReservasiEditActivity.class);
+                intent.putExtra("idMeja",String.valueOf(reservasi.idMeja));
+                intent.putExtra("tanggalReservasi",String.valueOf(reservasi.tanggalReservasi));
+                intent.putExtra("sesiReservasi",String.valueOf(reservasi.sesiReservasi));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -46,6 +64,8 @@ public class RecyclerViewAdapterReservasi extends RecyclerView.Adapter<RecyclerV
 
     public class ResViewHolder extends RecyclerView.ViewHolder{
         private ItemReservasiBinding itemResBinding;
+        private ConstraintLayout mParent;
+        private TextView positionId;
 
         public ResViewHolder(ItemReservasiBinding itemResBinding) {
             super(itemResBinding.getRoot());
@@ -55,6 +75,8 @@ public class RecyclerViewAdapterReservasi extends RecyclerView.Adapter<RecyclerV
         public void bind(Object obj) {
             itemResBinding.setVariable(BR.res, obj);
             itemResBinding.executePendingBindings();
+            mParent = itemView.findViewById(R.id.mParent);
+            positionId = itemView.findViewById(R.id.position_id);
         }
 
         public ItemReservasiBinding getItemMenuBinding() {
