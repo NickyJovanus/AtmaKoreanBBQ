@@ -36,16 +36,18 @@
                 android:gravity="bottom|center_horizontal"
                 android:src="@drawable/logotext"/>
 
-            <SearchView
+            <android.widget.SearchView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/searchMenu"
+                android:id="@+id/sv_menu"
                 android:iconifiedByDefault="false"
                 android:layout_marginLeft="10dp"
-                android:queryHint="Search Menu"
+                android:queryHint=""
+                app:iconifiedByDefault="false"
                 android:paddingTop="50dp"
                 android:paddingBottom="15dp"
                 android:layout_marginRight="10dp"/>
+
         </androidx.appcompat.widget.Toolbar>
 
         <TextView

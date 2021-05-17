@@ -1,6 +1,10 @@
 package com.nickyjovanus.atmakoreanbbq;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
@@ -46,93 +51,35 @@ public class MenuActivity extends AppCompatActivity {
 
     private RecyclerViewAdapterMenu adapter;
     private RecyclerView recyclerView;
-    ArrayList<Menu> ListMenu;
+    private List<Menu> ListMenu = new ArrayList<>();
     private View view;
-    ActivityMenuBinding binding;
+    private ActivityMenuBinding binding;
 
     private SwipeRefreshLayout swipeRefresh;
     private SearchView searchView;
+
+    Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        searchView = findViewById(R.id.searchMenu);
-        swipeRefresh = findViewById(R.id.swipeRefresh);
-//        ListMenu = new ArrayList<Menu>();
-        getMenu();
-        swipeRefresh.setRefreshing(true);
 
+        searchView   = findViewById(R.id.sv_menu);
+        searchView.setQueryHint("Search Here");
+
+        swipeRefresh = findViewById(R.id.swipeRefresh);
+        swipeRefresh.setRefreshing(true);
+        getMenu();
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 getMenu();
             }
         });
-    }
 
-//    public void getMenu() {
-//        RequestQueue queue = Volley.newRequestQueue(MenuActivity.this);
-//
-//        final ProgressDialog progressDialog;
-//        progressDialog = new ProgressDialog(MenuActivity.this);
-//        progressDialog.setMessage("Loading....");
-//        progressDialog.setProgressStyle(android.app.ProgressDialog.STYLE_SPINNER);
-//        progressDialog.show();
-//
-//        final JsonObjectRequest stringRequest = new JsonObjectRequest(GET, MenuAPI.SHOW
-//                , null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                progressDialog.dismiss();
-//                swipeRefresh.setRefreshing(false);
-//                try {
-//                    JSONArray jsonArray = response.getJSONArray("data");
-//                    if(!ListMenu.isEmpty())
-//                        ListMenu.clear();
-//
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//
-//                        int idMenu           = jsonObject.optInt("id_menu");
-//                        String namaMenu      = jsonObject.optString("nama_menu");
-//                        double hargaMenu     = jsonObject.optDouble("harga_menu");
-//                        String unitMenu      = jsonObject.optString("unit_menu");
-//                        String deskripsiMenu = jsonObject.optString("deskripsi_menu");
-//                        int stokMenu         = jsonObject.optInt("stok_menu");
-//                        String kategori      = jsonObject.optString("kategori_menu");
-//                        String gambar        = jsonObject.optString("gambar_menu");
-//
-//                        Menu menu = new Menu(idMenu, namaMenu, hargaMenu, stokMenu,unitMenu, deskripsiMenu, kategori,gambar);
-//                        ListMenu.add(menu);
-//                    }
-////                    adapter.notifyDataSetChanged();
-//                    generateDataList(ListMenu);
-//                }catch (JSONException e){
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                //Disini bagian jika response jaringan terdapat ganguan/error
-//                progressDialog.dismiss();
-//                Toast.makeText(MenuActivity.this, error.getMessage(),
-//                        Toast.LENGTH_SHORT).show();
-//                swipeRefresh.setRefreshing(false);
-//            }
-//        }){
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String,String> headers = new HashMap<>();
-//
-//                headers.put("Content-Type","application/x-www-form-urlencoded");
-//                return headers;
-//            }
-//        };
-//        // Disini proses penambahan request yang sudah kita buat ke request queue yang sudah dideklarasi
-//        queue.add(stringRequest);
-//    }
+        searchView.setOnQueryTextListener(getQueryTextListener());
+    }
 
     private void getMenu() {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
@@ -142,6 +89,7 @@ public class MenuActivity extends AppCompatActivity {
             public void onResponse(Call<MenuResponse> call, Response<MenuResponse> response) {
                 generateDataList(response.body().getMenus());
                 swipeRefresh.setRefreshing(false);
+                searchView.setOnQueryTextListener(getQueryTextListener());
             }
 
             @Override
@@ -150,31 +98,53 @@ public class MenuActivity extends AppCompatActivity {
                 swipeRefresh.setRefreshing(false);
             }
         });
-
     }
 
     private void generateDataList(List<Menu> menuList) {
         recyclerView = findViewById(R.id.rv_menu);
-        adapter = new RecyclerViewAdapterMenu(this,menuList);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_menu);
+        adapter = new RecyclerViewAdapterMenu(this, menuList);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_menu);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MenuActivity.this);
         binding.rvMenu.setLayoutManager((new LinearLayoutManager(this)));
-        binding.rvMenu.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setLayoutManager(layoutManager);
+//        binding.setAdaptermenu(adapter);
         binding.setAdaptermenu(adapter);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setQueryHint("Search Menu");
+        searchView.setActivated(true);
+        searchView.onActionViewExpanded();
+        searchView.setOnQueryTextListener(getQueryTextListener());
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.i("search submit", query);
-                adapter.getFilter().filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.i("search change", newText);
-                adapter.getFilter().filter(newText);
-                return false;
+            public void onRefresh() {
+                getMenu();
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        searchView.setOnQueryTextListener(getQueryTextListener());
+    }
+
+
+    public SearchView.OnQueryTextListener getQueryTextListener(){
+        return new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                if(adapter != null)
+                    adapter.getFilter().filter(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if(adapter != null)
+                    adapter.getFilter().filter(s);
+                return false;
+            }
+        };
+    }
+
 }
