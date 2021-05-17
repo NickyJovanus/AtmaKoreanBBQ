@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_fotoBarang" />
 
         <TextView
-            android:id="@+id/hargaRp"
+            android:id="@+id/totalItemPrefix"
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             tools:text="Rp." />
 
         <TextView
-            android:id="@+id/hargaMenu"
+            android:id="@+id/totalItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -68,12 +68,12 @@
             android:text="@{String.valueOf(menu.hargaMenu)}"
             android:fontFamily="sans-serif"
             android:textColor="@android:color/white"
-            app:layout_constraintStart_toEndOf="@+id/hargaRp"
+            app:layout_constraintStart_toEndOf="@+id/totalItemPrefix"
             app:layout_constraintTop_toBottomOf="@+id/namaMenu"
             tools:text="Harga Menu" />
 
         <TextView
-            android:id="@+id/unit"
+            android:id="@+id/noMejaPrefix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -82,14 +82,14 @@
             android:textColor="@android:color/white"
             android:layout_marginStart="12dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hargaRp"
+            app:layout_constraintTop_toBottomOf="@+id/totalItemPrefix"
             tools:text="Plate" />
 
         <TextView
             android:id="@+id/deskripsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/unit"
+            app:layout_constraintTop_toBottomOf="@+id/noMejaPrefix"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="sans-serif"
             android:text="@{menu.deskripsiMenu}"

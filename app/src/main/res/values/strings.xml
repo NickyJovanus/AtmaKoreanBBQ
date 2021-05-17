@@ -4,4 +4,7 @@
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="welcome_to_atma_korean_bbq">Welcome to Atma Korean BBQ!</string>
     <string name="rp">Rp. </string>
+    <string name="totalitem">Total Item:</string>
+    <string name="totalmenu">Total Menu:</string>
+    <string name="no_meja">No. Meja:</string>
 </resources>

@@ -77,8 +77,6 @@ public class MenuActivity extends AppCompatActivity {
                 getMenu();
             }
         });
-
-        searchView.setOnQueryTextListener(getQueryTextListener());
     }
 
     private void getMenu() {
@@ -108,15 +106,7 @@ public class MenuActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         searchView.setQueryHint("Search Menu");
-        searchView.setActivated(true);
-        searchView.onActionViewExpanded();
         searchView.setOnQueryTextListener(getQueryTextListener());
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getMenu();
-            }
-        });
     }
 
     @Override
