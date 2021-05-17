@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -53,7 +54,6 @@ public class MenuActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Menu> ListMenu = new ArrayList<>();
     private View view;
-    private ActivityMenuBinding binding;
 
     private SwipeRefreshLayout swipeRefresh;
     private SearchView searchView;
@@ -103,12 +103,9 @@ public class MenuActivity extends AppCompatActivity {
     private void generateDataList(List<Menu> menuList) {
         recyclerView = findViewById(R.id.rv_menu);
         adapter = new RecyclerViewAdapterMenu(this, menuList);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_menu);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MenuActivity.this);
-        binding.rvMenu.setLayoutManager((new LinearLayoutManager(this)));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-//        binding.setAdaptermenu(adapter);
-        binding.setAdaptermenu(adapter);
+        recyclerView.setAdapter(adapter);
 
         searchView.setQueryHint("Search Menu");
         searchView.setActivated(true);
@@ -145,6 +142,11 @@ public class MenuActivity extends AppCompatActivity {
                 return false;
             }
         };
+    }
+
+
+    public void home(View view){
+        startActivity(new Intent(MenuActivity.this,HomeActivity.class));
     }
 
 }
