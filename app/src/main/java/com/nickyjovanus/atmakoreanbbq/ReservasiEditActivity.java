@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -22,6 +25,7 @@ import com.nickyjovanus.atmakoreanbbq.adapter.AdapterDetail;
 import com.nickyjovanus.atmakoreanbbq.adapter.RecyclerViewAdapterReservasi;
 import com.nickyjovanus.atmakoreanbbq.database.Detail;
 import com.nickyjovanus.atmakoreanbbq.database.Reservasi;
+import com.nickyjovanus.atmakoreanbbq.dialog.AddDetailDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,17 +46,20 @@ public class ReservasiEditActivity extends AppCompatActivity {
     private SharedPreferences sp;
     String noMeja, tanggalReservasi, sesiReservasi;
     TextView tvNoMeja, tvTanggalReservasi, tvSesiReservasi;
-    int idPesanan;
+    Button addButton;
+    public int idPesanan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservasi_edit);
+        sp = new SharedPreferences(ReservasiEditActivity.this);
 
         noMeja = getIntent().getStringExtra("gambar");
         tanggalReservasi = getIntent().getStringExtra("tanggalReservasi");
         sesiReservasi = getIntent().getStringExtra("sesiReservasi");
         idPesanan = getIntent().getIntExtra("idPesanan", -1);
+        sp.setIdPesanan(idPesanan);
 
         tvNoMeja = findViewById(R.id.noMeja);
         tvTanggalReservasi = findViewById(R.id.tanggalPesanan);
@@ -61,6 +68,22 @@ public class ReservasiEditActivity extends AppCompatActivity {
         tvNoMeja.setText(noMeja);
         tvTanggalReservasi.setText(tanggalReservasi);
         tvSesiReservasi.setText(sesiReservasi);
+
+        addButton = findViewById(R.id.addDetailBtn);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddDetailDialog addDetailDialog = new AddDetailDialog(ReservasiEditActivity.this);
+                addDetailDialog.show();
+
+                addDetailDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        getDetail();
+                    }
+                });
+            }
+        });
 
         detailList = new ArrayList<>();
         getDetail();

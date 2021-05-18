@@ -28,7 +28,7 @@ public class AdapterDetail extends RecyclerView.Adapter<AdapterDetail.DetailHold
     @Override
     public DetailHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         ItemDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.item_meja, parent, false);
+                R.layout.item_detail, parent, false);
         return new DetailHolder(binding);
     }
 
@@ -53,7 +53,7 @@ public class AdapterDetail extends RecyclerView.Adapter<AdapterDetail.DetailHold
         }
 
         public void bind(Object obj) {
-            itemDetailBinding.setVariable(BR.res, obj);
+            itemDetailBinding.setVariable(BR.detail, obj);
             itemDetailBinding.executePendingBindings();
         }
 

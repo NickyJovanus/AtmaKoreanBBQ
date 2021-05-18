@@ -15,6 +15,8 @@ public class SharedPreferences {
     private static final String telponCustomer = "telpon";
     private static final String emailCustomer  = "email";
 
+    private static final String idPesanan      = "idpesanan";
+
     public SharedPreferences(Context context){
         preferences = context.getSharedPreferences(PREFERENCE_NAME, Activity.MODE_PRIVATE);
         editor = preferences.edit();
@@ -39,5 +41,8 @@ public class SharedPreferences {
 
     public String getNamaCustomer() {return preferences.getString(namaCustomer,"");}
     public int getIdCustomer() {return preferences.getInt(idCustomer,0);}
+
+    public void setIdPesanan(int idpesanan1) {editor.putInt(idPesanan, idpesanan1); editor.commit();}
+    public int getIdPesanan() {return preferences.getInt(idPesanan, 0);}
 }
 
