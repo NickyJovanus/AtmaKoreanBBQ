@@ -96,20 +96,22 @@ public class ReservationListActivity extends AppCompatActivity {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                        if(!jsonObject.optString("status_reservasi").equals("paid")) {
 
-                        int idReservasi           = jsonObject.optInt("id_reservasi");
-                        String tanggalReservasi   = jsonObject.optString("tanggal_reservasi");
-                        String sesiReservasi      = jsonObject.optString("sesi_reservasi");
-                        int idPesanan             = jsonObject.optInt("id_pesanan");
-                        int idMeja                = jsonObject.optInt("id_meja");
-                        int noMeja                = jsonObject.optInt("no_meja");
-                        int totalMenu             = jsonObject.optInt("total_menu");
-                        int totalItem             = jsonObject.optInt("total_item");
-                        int idKaryawan            = jsonObject.optInt("id_karyawan");
-                        int idCustomer            = sp.getIdCustomer();
+                            int idReservasi = jsonObject.optInt("id_reservasi");
+                            String tanggalReservasi = jsonObject.optString("tanggal_reservasi");
+                            String sesiReservasi = jsonObject.optString("sesi_reservasi");
+                            int idPesanan = jsonObject.optInt("id_pesanan");
+                            int idMeja = jsonObject.optInt("id_meja");
+                            int noMeja = jsonObject.optInt("no_meja");
+                            int totalMenu = jsonObject.optInt("total_menu");
+                            int totalItem = jsonObject.optInt("total_item");
+                            int idKaryawan = jsonObject.optInt("id_karyawan");
+                            int idCustomer = sp.getIdCustomer();
 
-                        Reservasi reservasi = new Reservasi(idReservasi, tanggalReservasi, sesiReservasi, idPesanan, idMeja, noMeja, totalMenu, totalItem, idKaryawan, idCustomer);
-                        reservasiList.add(reservasi);
+                            Reservasi reservasi = new Reservasi(idReservasi, tanggalReservasi, sesiReservasi, idPesanan, idMeja, noMeja, totalMenu, totalItem, idKaryawan, idCustomer);
+                            reservasiList.add(reservasi);
+                        }
                     }
                     adapter.notifyDataSetChanged();
                 }catch (JSONException e){
@@ -119,14 +121,7 @@ public class ReservationListActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                try {
-                    String responseBody = new String(error.networkResponse.data, "utf-8");
-                    JSONObject data = new JSONObject(responseBody);
-                    String message = data.getString("message");
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-                } catch (JSONException e) {
-                } catch (UnsupportedEncodingException errorr) {
-                }
+                Toast.makeText(ReservationListActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
                 swipeRefresh.setRefreshing(false);
             }
         }){

@@ -1,16 +1,12 @@
 package com.nickyjovanus.atmakoreanbbq;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,23 +23,17 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.ikovac.timepickerwithseconds.MyTimePickerDialog;
-import com.nickyjovanus.atmakoreanbbq.API.CustomerAPI;
 import com.nickyjovanus.atmakoreanbbq.API.ReservasiAPI;
-import com.nickyjovanus.atmakoreanbbq.adapter.AdapterMeja;
-import com.nickyjovanus.atmakoreanbbq.adapter.RecyclerViewAdapterMenu;
 import com.nickyjovanus.atmakoreanbbq.database.Meja;
-import com.nickyjovanus.atmakoreanbbq.database.Menu;
 import com.nickyjovanus.atmakoreanbbq.database.Reservasi;
 import com.nickyjovanus.atmakoreanbbq.retrofit.ApiClient;
 import com.nickyjovanus.atmakoreanbbq.retrofit.ApiInterface;
 import com.nickyjovanus.atmakoreanbbq.retrofit.MejaResponse;
-import com.nickyjovanus.atmakoreanbbq.retrofit.MenuResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

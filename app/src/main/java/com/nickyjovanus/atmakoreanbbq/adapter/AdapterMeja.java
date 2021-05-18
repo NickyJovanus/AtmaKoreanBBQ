@@ -12,7 +12,6 @@ import com.nickyjovanus.atmakoreanbbq.BR;
 import com.nickyjovanus.atmakoreanbbq.R;
 import com.nickyjovanus.atmakoreanbbq.database.Meja;
 import com.nickyjovanus.atmakoreanbbq.databinding.ItemMejaBinding;
-import com.nickyjovanus.atmakoreanbbq.databinding.ItemReservasiBinding;
 
 import java.util.List;
 
