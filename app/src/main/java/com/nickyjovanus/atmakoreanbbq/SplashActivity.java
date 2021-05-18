@@ -21,7 +21,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Customer customer = new Customer();
-                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+//                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                Intent intent = new Intent(SplashActivity.this, ReservationListActivity.class);
                 startActivity(intent);
                 finish();
             }

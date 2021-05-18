@@ -11,4 +11,7 @@ public interface ApiInterface {
 
     @GET("menu/{id}")
     Call<MenuResponse> getMenuById(@Path("id") String id, @Query("data") String data);
+
+    @GET("meja")
+    Call<MejaResponse> getAllMeja(@Query("data") String data);
 }

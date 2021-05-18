@@ -80,7 +80,7 @@
                 android:layout_weight="0.8"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/ti_telponCustomer"
+                android:id="@+id/ti_sesiReservasi"
                 android:textColorHint="@color/white"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Nomor Telepon"
@@ -91,7 +91,7 @@
                     android:fontFamily="sans-serif-condensed-light"
                     android:textColor="@color/white"
                     android:inputType="text"
-                    android:id="@+id/tf_telponCustomer">
+                    android:id="@+id/tf_sesiReservasi">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColorHint="@color/white"
-                android:id="@+id/ti_emailCustomer"
+                android:id="@+id/ti_noMeja"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="Alamat E-mail"
                 app:errorEnabled="true">
@@ -110,7 +110,7 @@
                     android:fontFamily="sans-serif-condensed-light"
                     android:textColor="@color/white"
                     android:inputType="text"
-                    android:id="@+id/tf_emailCustomer">
+                    android:id="@+id/tf_noMeja">
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 

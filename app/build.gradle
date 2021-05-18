@@ -75,4 +75,7 @@ dependencies {
     //Swipe Refresh
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
+    //Time Picker Seconds
+    compile 'com.kovachcode:timePickerWithSeconds:1.0.1'
+
 }

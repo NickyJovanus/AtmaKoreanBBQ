@@ -43,12 +43,12 @@ public class CustomerActivity extends AppCompatActivity {
         sp = new SharedPreferences(CustomerActivity.this);
 
         namaCustomer    = findViewById(R.id.tf_tanggalReservasi);
-        telponCustomer  = findViewById(R.id.tf_telponCustomer);
-        emailCustomer   = findViewById(R.id.tf_emailCustomer);
+        telponCustomer  = findViewById(R.id.tf_sesiReservasi);
+        emailCustomer   = findViewById(R.id.tf_noMeja);
 
         namaLayout      = findViewById(R.id.ti_tanggalReservasi);
-        telponLayout    = findViewById(R.id.ti_telponCustomer);
-        emailLayout     = findViewById(R.id.ti_emailCustomer);
+        telponLayout    = findViewById(R.id.ti_sesiReservasi);
+        emailLayout     = findViewById(R.id.ti_noMeja);
 
         submit          = findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
