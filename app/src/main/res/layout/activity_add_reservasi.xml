@@ -88,7 +88,7 @@
                         android:id="@+id/ti_sesiReservasi"
                         android:textColorHint="@color/white"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:hint="Sesi Reservasi"
+                        android:hint="Sesi Pesanan"
                         app:errorEnabled="true">
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -120,7 +120,8 @@
                         <Spinner
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="30dp"
+                            android:padding="25dp"
+                            android:background="@drawable/outline_bg"
                             android:layout_marginTop="-30dp"
                             android:fontFamily="sans-serif-condensed-light"
                             android:textColor="@color/white"

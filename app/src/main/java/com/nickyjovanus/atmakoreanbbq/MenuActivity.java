@@ -66,7 +66,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         searchView   = findViewById(R.id.sv_menu);
-        searchView.setQueryHint("Search Here");
+        searchView.setQueryHint("Search Menu");
 
         swipeRefresh = findViewById(R.id.swipeRefresh);
         swipeRefresh.setRefreshing(true);

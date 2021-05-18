@@ -106,8 +106,9 @@ public class ReservationListActivity extends AppCompatActivity {
                         int totalMenu             = jsonObject.optInt("total_menu");
                         int totalItem             = jsonObject.optInt("total_item");
                         int idKaryawan            = jsonObject.optInt("id_karyawan");
+                        int idCustomer            = sp.getIdCustomer();
 
-                        Reservasi reservasi = new Reservasi(idReservasi, tanggalReservasi, sesiReservasi, idPesanan, idMeja, noMeja, totalMenu, totalItem, idKaryawan);
+                        Reservasi reservasi = new Reservasi(idReservasi, tanggalReservasi, sesiReservasi, idPesanan, idMeja, noMeja, totalMenu, totalItem, idKaryawan, idCustomer);
                         reservasiList.add(reservasi);
                     }
                     adapter.notifyDataSetChanged();
@@ -118,15 +119,6 @@ public class ReservationListActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Disini bagian jika response jaringan terdapat ganguan/error
-
-//                NetworkResponse response = error.networkResponse;
-//
-//                if(response != null && response.data != null) {
-//                    String errorString = new String(response.data);
-//                    Toast.makeText(ReservationListActivity.this, errorString, Toast.LENGTH_SHORT).show();
-//                }
-
                 try {
                     String responseBody = new String(error.networkResponse.data, "utf-8");
                     JSONObject data = new JSONObject(responseBody);
@@ -146,7 +138,6 @@ public class ReservationListActivity extends AppCompatActivity {
                 return headers;
             }
         };
-        // Disini proses penambahan request yang sudah kita buat ke request queue yang sudah dideklarasi
         queue.add(stringRequest);
     }
 }

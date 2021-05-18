@@ -10,12 +10,13 @@ public class Reservasi {
     public int totalMenu;
     public int totalItem;
     public int idKaryawan;
+    public int idCustomer;
 
     public Reservasi() {}
 
     public Reservasi(int idReservasi, String tanggalReservasi, String sesiReservasi,
                      int idPesanan, int idMeja, int noMeja, int totalMenu, int totalItem,
-                     int idKaryawan) {
+                     int idKaryawan, int idCustomer) {
         this.idReservasi = idReservasi;
         this.tanggalReservasi = tanggalReservasi;
         this.sesiReservasi = sesiReservasi;
@@ -25,6 +26,7 @@ public class Reservasi {
         this.totalMenu = totalMenu;
         this.totalItem = totalItem;
         this.idKaryawan = idKaryawan;
+        this.idCustomer = idCustomer;
     }
 
     public int getIdReservasi() {
@@ -97,5 +99,13 @@ public class Reservasi {
 
     public void setIdKaryawan(int idKaryawan) {
         this.idKaryawan = idKaryawan;
+    }
+
+    public int getIdCustomer() {
+        return idCustomer;
+    }
+
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
     }
 }
