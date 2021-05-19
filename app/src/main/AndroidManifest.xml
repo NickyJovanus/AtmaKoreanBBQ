@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AtmaKoreanBBQ"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CheckoutActivity"></activity>
+        <activity android:name=".CheckSplashActivity"></activity>
+        <activity android:name=".CheckoutActivity" />
         <activity android:name=".AddReservasiActivity" />
         <activity android:name=".ReservasiEditActivity" />
         <activity android:name=".ReservationListActivity" />

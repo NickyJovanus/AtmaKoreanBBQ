@@ -8,29 +8,24 @@ import android.os.Handler;
 
 import com.nickyjovanus.atmakoreanbbq.database.Customer;
 
-public class SplashActivity extends AppCompatActivity {
+public class CheckSplashActivity extends AppCompatActivity {
 
     Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_check_splash);
 
         handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Customer customer = new Customer();
-                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                Intent intent = new Intent(CheckSplashActivity.this, ReservationListActivity.class);
                 startActivity(intent);
                 finish();
             }
-        },1500);
+        },2000);
     }
 
-
-    @Override
-    public void onBackPressed() {
-        finishAffinity();
-    }
 }

@@ -2,6 +2,7 @@ package com.nickyjovanus.atmakoreanbbq.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
@@ -22,6 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.nickyjovanus.atmakoreanbbq.API.DetailPesananAPI;
 import com.nickyjovanus.atmakoreanbbq.API.ReservasiAPI;
 import com.nickyjovanus.atmakoreanbbq.AddReservasiActivity;
+import com.nickyjovanus.atmakoreanbbq.CustomerActivity;
 import com.nickyjovanus.atmakoreanbbq.R;
 import com.nickyjovanus.atmakoreanbbq.ReservasiEditActivity;
 import com.nickyjovanus.atmakoreanbbq.ReservationListActivity;
@@ -57,14 +60,16 @@ public class AddDetailDialog extends Dialog implements
     public Button yes, no;
     public TextInputEditText jumlahItem;
     public Spinner spinnerMenu;
+    public List<Menu> menuList;
     private int idMenu = -1;
     private int[] idMenus = new int[255];
     SharedPreferences sp;
     boolean clicked = false;
 
-    public AddDetailDialog(Activity a) {
+    public AddDetailDialog(Activity a, List<Menu> menuList) {
         super(a);
         this.activity = a;
+        this.menuList = menuList;
     }
 
     @Override
@@ -80,8 +85,20 @@ public class AddDetailDialog extends Dialog implements
 
         jumlahItem = findViewById(R.id.tf_jumlahItem);
         spinnerMenu = findViewById(R.id.spinner_NamaMenu);
+        spinnerMenu.setSelection(-1);
 
-        getNamaMenu();
+//        getNamaMenu();
+
+        List<Menu> mejaItem = menuList;
+        List<String> listSpinner = new ArrayList<String>();
+        for (int i = 0; i < mejaItem.size(); i++){
+            listSpinner.add(String.valueOf(mejaItem.get(i).getNamaMenu()));
+            idMenus[i] = mejaItem.get(i).getIdMenu();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
+                android.R.layout.simple_spinner_item, listSpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMenu.setAdapter(adapter);
 
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,17 +109,22 @@ public class AddDetailDialog extends Dialog implements
                     Detail detail = new Detail();
                     String jml = jumlahItem.getText().toString();
 
+                    final ProgressDialog progressDialog = new ProgressDialog(activity);
+                    progressDialog.setMessage("Processing...");
+                    progressDialog.show();
+
                     int positionMenu = spinnerMenu.getSelectedItemPosition();
                     for(int x = 0; x< idMenus.length; x++) {
                         if(positionMenu == x)
                             idMenu = idMenus[x];
                     }
+                    dismiss();
 
                     String idPesanan = String.valueOf(sp.getIdPesanan());
                     Log.i("jmlItem", jml);
                     Log.i("idMenu", String.valueOf(idMenu));
 
-                    RequestQueue queue = Volley.newRequestQueue(activity);
+                    RequestQueue queue = Volley.newRequestQueue(getContext());
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, DetailPesananAPI.ADD, new com.android.volley.Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -111,6 +133,8 @@ public class AddDetailDialog extends Dialog implements
                                 JSONObject data = obj.getJSONObject("data");
                                 Toast.makeText(activity, "Pesanan Successfully Added.", Toast.LENGTH_SHORT).show();
                                 activity.finish();
+                                activity.startActivity(activity.getIntent());
+                                progressDialog.dismiss();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -144,6 +168,7 @@ public class AddDetailDialog extends Dialog implements
                             } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                             }
+                            progressDialog.dismiss();
                         }
                     }) {
                         @Override
@@ -164,19 +189,17 @@ public class AddDetailDialog extends Dialog implements
                             return headers;
                         }
                     };
-
+                    stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                            0,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                     queue.add(stringRequest);
                 }
             }
         });
+
         no.setOnClickListener(this);
     }
-
-//    @Override
-//    public void onResume() {
-//
-//    }
-
 
     @Override
     public void onClick(View v) {
@@ -193,30 +216,5 @@ public class AddDetailDialog extends Dialog implements
     }
 
     public void getNamaMenu() {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<MenuResponse> call = apiService.getAllMenu("data");
-        call.enqueue(new Callback<MenuResponse>() {
-            @Override
-            public void onResponse(Call<MenuResponse> call, Response<MenuResponse> response) {
-                if (response.isSuccessful()) {
-                    List<Menu> mejaItem = response.body().getMenus();
-                    List<String> listSpinner = new ArrayList<String>();
-                    for (int i = 0; i < mejaItem.size(); i++){
-                        listSpinner.add(String.valueOf(mejaItem.get(i).getNamaMenu()));
-                        idMenus[i] = mejaItem.get(i).getIdMenu();
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity,
-                            android.R.layout.simple_spinner_item, listSpinner);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerMenu.setAdapter(adapter);
-                } else {
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MenuResponse> call, Throwable t) {
-                Toast.makeText(activity, "Network Error", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

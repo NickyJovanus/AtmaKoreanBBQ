@@ -5,5 +5,6 @@ public class ReservasiAPI {
     public static final String ADD    = API + "reservasicustomer/";
     public static final String SHOW   = API + "reservasicustomer/";
     public static final String UPDATE = API + "reservasi/";
-    public static final String DELETE = API + "reservasi/";
+    public static final String DELETE = API + "reservasicustomer/";
+    public static final String PAY    = API + "reservasi/pay/";
 }

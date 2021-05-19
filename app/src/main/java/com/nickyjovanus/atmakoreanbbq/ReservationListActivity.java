@@ -121,7 +121,16 @@ public class ReservationListActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ReservationListActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                try {
+                    String responseBody = new String(error.networkResponse.data, "utf-8");
+                    JSONObject data = new JSONObject(responseBody);
+                    String message = data.getString("message");
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    Toast.makeText(ReservationListActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                } catch (UnsupportedEncodingException errorr) {
+                    Toast.makeText(ReservationListActivity.this, "Network Error", Toast.LENGTH_SHORT).show();
+                }
                 swipeRefresh.setRefreshing(false);
             }
         }){

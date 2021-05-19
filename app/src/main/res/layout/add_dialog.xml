@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+    android:minWidth="400dp"
+    android:padding="10dp"
     android:layout_height="300dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
+    android:background="@color/brown"
     android:orientation="vertical">
 
 
@@ -11,15 +13,20 @@
         android:id="@+id/linear_form"
         android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
         android:layout_height="60dp"
         android:orientation="vertical"
         android:padding="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Menu"
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_weight="0.8"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="155dp"
             android:id="@+id/ti_namaMenu"
             android:textColorHint="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -27,8 +34,7 @@
             app:errorEnabled="true">
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="25dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/outline_bg"
                 android:layout_marginTop="-30dp"
                 android:fontFamily="sans-serif-condensed-light"
@@ -40,7 +46,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_weight="0.8"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="150dp"
             android:id="@+id/ti_jumlahItem"
             android:textColorHint="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -48,7 +55,7 @@
             app:errorEnabled="true">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:fontFamily="sans-serif-condensed-light"
                 android:textColor="@color/white"
                 android:inputType="numberDecimal"
@@ -71,7 +78,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:text="Cancel"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="5dp"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -79,7 +86,7 @@
             android:id="@+id/btn_yes"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:clickable="true"
             android:backgroundTint="@color/green"
             android:text="Yes"

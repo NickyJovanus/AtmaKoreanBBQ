@@ -49,6 +49,7 @@ public class RecyclerViewAdapterReservasi extends RecyclerView.Adapter<RecyclerV
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ReservasiEditActivity.class);
+                intent.putExtra("idReservasi",Integer.valueOf(reservasi.idReservasi));
                 intent.putExtra("noMeja",String.valueOf(reservasi.noMeja));
                 intent.putExtra("tanggalReservasi",String.valueOf(reservasi.tanggalReservasi));
                 intent.putExtra("sesiReservasi",String.valueOf(reservasi.sesiReservasi));
